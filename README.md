@@ -103,10 +103,15 @@ openWakeWord and act on detections. Where that already exists:
   Home Assistant's wake-word ecosystem) can load the `.onnx` directly. Note
   HA's add-on defaults to tflite models; this kit deliberately produces ONNX.
 - **Reachy Mini**: the stock conversation app has no wake-word support today.
-  A standby-mode PR adding it (opt-in `STANDBY_ON_SLEEP=1`, model path via
-  `WAKE_WORD_MODEL`) is open at
-  [pollen-robotics/reachy_mini_conversation_app#514](https://github.com/pollen-robotics/reachy_mini_conversation_app/pull/514)
-  — until it lands, that PR branch is the reference integration.
+  Standby-mode support (opt-in `STANDBY_ON_SLEEP=1`, wake model via
+  `WAKE_WORD_MODEL` — pretrained name or a custom `.onnx` from this kit) has
+  been proposed upstream:
+  [pollen-robotics/reachy_mini_conversation_app **PR #514**](https://github.com/pollen-robotics/reachy_mini_conversation_app/pull/514).
+
+  > **PR #514 status: open, awaiting maintainer review** *(last checked
+  > 2026-08-02).* This README will be updated once its fate is decided —
+  > merged (use the stock app) or not (use the PR branch as the reference
+  > integration).
 
 ## Runtime notes for your own stack
 
