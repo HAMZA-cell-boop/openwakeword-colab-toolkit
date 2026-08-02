@@ -48,7 +48,13 @@ holds the whole config. Change:
 Leave the rest alone unless you've read the yaml's comments.
 
 **3. Run it.** Colab → File → Upload notebook → Runtime → **T4 GPU** →
-Run all. Keep the tab open. Cell 1 fails fast if you didn't get a GPU;
+Run all.
+
+> ⚠ **Budget for Colab Pro (US$9.99/month).** The full job is ~2 GPU-hours,
+> and free-tier credit is unpredictable — in our runs it expired mid-job and
+> stranded a nearly-finished model, forcing a rerun. Pro finished the same
+> job comfortably; you can cancel after training. If you do try the free
+> tier, be prepared for the session to be reclaimed partway through. Keep the tab open. Cell 1 fails fast if you didn't get a GPU;
 cell 2 ends with a preflight so environment problems die in the fast cell,
 not 30 minutes into training. At the end your browser downloads a zip with
 `<name>.onnx` **and `<name>.onnx.data`** — you need BOTH (the weights live
@@ -86,6 +92,21 @@ the machine they ran on; run them where the model will actually live.
 
 **5. Deploy** at the recommended threshold, and keep your old wake word one
 config line away for rollback.
+
+## What this kit does — and doesn't — provide
+
+This kit produces and validates the **wake-word model**. It does not give
+your app ears: something in your stack must route mic audio through
+openWakeWord and act on detections. Where that already exists:
+
+- **Anything that embeds openWakeWord** (Python stacks, Wyoming satellites,
+  Home Assistant's wake-word ecosystem) can load the `.onnx` directly. Note
+  HA's add-on defaults to tflite models; this kit deliberately produces ONNX.
+- **Reachy Mini**: the stock conversation app has no wake-word support today.
+  A standby-mode PR adding it (opt-in `STANDBY_ON_SLEEP=1`, model path via
+  `WAKE_WORD_MODEL`) is open at
+  [pollen-robotics/reachy_mini_conversation_app#514](https://github.com/pollen-robotics/reachy_mini_conversation_app/pull/514)
+  — until it lands, that PR branch is the reference integration.
 
 ## Runtime notes for your own stack
 
